@@ -7,8 +7,9 @@
     "start": "node ./build/main.js",
     "build": "backpack build",
     "dev": "backpack | bunyan",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "test": "NO_PROXY=* mocha './test/**/*.spec.js'",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix"
   },
   "author": "HieuVP",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "mongoose": "^4.11.7"
   },
   "devDependencies": {
+    "chai": "^4.1.1",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-standard": "^1.4.1",
     "eslint-plugin-import": "^2.7.0",
@@ -26,6 +28,8 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.2.1",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.0"
   }
 }
