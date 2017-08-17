@@ -1,0 +1,22 @@
+version: '2'
+services:
+  microservice-graphql:
+    build:
+      context: .
+      args:
+        - SERVICE_NAME=microservice-graphql
+        - NPM_REGISTRY
+        - NPM_TOKEN
+        - HTTP_PROXY
+        - HTTPS_PROXY
+    environment:
+      - SERVICE_PORT=8080
+      - WAIT_START=1
+    ports:
+      - 8080:8080
+    depends_on:
+      - database-mongodb
+  database-mongodb:
+    image: tutum/mongodb
+    ports:
+      - 27017:27017
