@@ -1,20 +1,20 @@
-const hapi = require('hapi');
-const mongoose = require('mongoose');
+// index.js
+//
 
-const server = new hapi.Server();
+// Application entrypoint. Actually starts the server.
+const server = require('./server');
 
-server.connection({
-  host: '0.0.0.0',
-  port: 8080
-});
-
-mongoose.connect('mongodb://192.168.99.100:27017/test_database', {
-  useMongoClient: true
-});
-
-server.start((err) => {
-  if (err) {
-    throw err;
+// Start the server, detail out what's going on.
+server.start((startError) => {
+  if (startError) {
+    console.log(`An error occurred starting the server: ${startError}`);
+    throw startError;
   }
-  console.log(`Server running at: ${server.info.uri}`);
+
+  server.connections.forEach((connection) => {
+    const label = connection.settings.labels[0];
+    const { protocol, host, port } = connection.info;
+
+    console.log(`${label} running at: ${protocol}://${host}:${port}`);
+  });
 });
