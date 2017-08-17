@@ -1,0 +1,10 @@
+{
+  "name": "hapijs-graphql",
+  "version": "1.0.0",
+  "description": "GraphQL with Hapi.js",
+  "main": "src/index.js",
+  "scripts": {
+  },
+  "author": "HieuVP",
+  "license": "ISC"
+}
