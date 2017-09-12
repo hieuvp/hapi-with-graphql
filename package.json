@@ -14,8 +14,11 @@
   "author": "HieuVP",
   "license": "ISC",
   "dependencies": {
+    "apollo-server": "^0.3.3",
     "backpack-core": "^0.4.2",
     "bunyan": "^1.8.12",
+    "graphql": "^0.10.5",
+    "graphql-tools": "^1.2.1",
     "hapi": "^16.5.2",
     "mongoose": "^4.11.7"
   },
