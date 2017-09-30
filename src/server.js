@@ -1,7 +1,12 @@
-const mongoose = require('mongoose');
 const hapi = require('hapi');
+const mongoose = require('mongoose');
+const { apolloHapi, graphiqlHapi } = require('apollo-server');
+const { makeExecutableSchema } = require('graphql-tools');
+
 
 mongoose.connect('mongodb://192.168.99.100:27017/test_database', {
+  user: 'admin',
+  pass: '123456',
   useMongoClient: true
 });
 
