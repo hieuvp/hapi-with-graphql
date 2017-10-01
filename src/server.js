@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { apolloHapi, graphiqlHapi } = require('apollo-server');
 const { makeExecutableSchema } = require('graphql-tools');
 
+const schema = require('./graphql/schema');
+const resolvers = require('./graphql/resolvers');
 
 mongoose.connect('mongodb://192.168.99.100:27017/test_database', {
   user: 'admin',
@@ -12,6 +14,9 @@ mongoose.connect('mongodb://192.168.99.100:27017/test_database', {
   promiseLibrary: global.Promise
 });
 
+const executableSchema = makeExecutableSchema({
+  resolvers,
+  typeDefs: [schema]
 });
 
 const server = new hapi.Server();
@@ -25,7 +30,27 @@ server.connection([
   }
 ]);
 
-const plugins = [];
+const plugins = [
+  {
+    register: apolloHapi,
+    options: {
+      path: '/graphql',
+      apolloOptions: () => ({
+        pretty: true,
+        schema: executableSchema
+      })
+    }
+  },
+  {
+    register: graphiqlHapi,
+    options: {
+      path: '/graphiql',
+      graphiqlOptions: {
+        endpointURL: '/graphql'
+      }
+    }
+  }
+];
 
 server.register(plugins, (err) => {
   if (err) {
