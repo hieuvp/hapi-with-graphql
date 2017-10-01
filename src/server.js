@@ -7,7 +7,11 @@ const { makeExecutableSchema } = require('graphql-tools');
 mongoose.connect('mongodb://192.168.99.100:27017/test_database', {
   user: 'admin',
   pass: '123456',
-  useMongoClient: true
+  auth: { authdb: 'admin' },
+  useMongoClient: true,
+  promiseLibrary: global.Promise
+});
+
 });
 
 const server = new hapi.Server();
